@@ -1,6 +1,10 @@
 {
+  "scripts": {
+    "debug":"tsc && node build/main.js"
+  },
   "devDependencies": {
     "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.7",
     "prettier": "^3.2.5",
     "type-fest": "^4.15.0",
     "typescript": "^5.4.5"
