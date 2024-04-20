@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "prettier": "^3.2.5",
+    "type-fest": "^4.15.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
