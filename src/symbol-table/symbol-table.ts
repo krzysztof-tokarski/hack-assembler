@@ -9,6 +9,19 @@ import {
 } from './models/_index';
 import { Computation } from './models/computation.model';
 
+export type ComputationKey = keyof typeof SymbolTable.computation;
+export type DestinationKey = keyof typeof SymbolTable.destination;
+export type InstructionKey = keyof typeof SymbolTable.instruction;
+export type JumpKey = keyof typeof SymbolTable.jump;
+export type PreDefinedSymbolKey = keyof typeof SymbolTable.preDefinedSymbol;
+
+export type SymbolTableKey =
+	| ComputationKey
+	| DestinationKey
+	| InstructionKey
+	| JumpKey
+	| PreDefinedSymbolKey;
+
 export class SymbolTable {
 	public static readonly instruction: TranslationsDict<Instruction> = {
 		A: BinaryValue('0'),
