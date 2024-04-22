@@ -4,8 +4,8 @@ type FileText = string & { fromGetFileText: true };
 
 export class TextFileParser {
 	public static getProgramLinesArray(filePath: string) {
-		const file = this._readFile(filePath);
-		return this._splitAndSanitize(this._getFileText(file));
+		const file = TextFileParser._readFile(filePath);
+		return TextFileParser._splitAndSanitize(TextFileParser._getFileText(file));
 	}
 
 	public static writeToExecutable(program: string[], fileName: string) {
@@ -24,16 +24,16 @@ export class TextFileParser {
 	private static _splitAndSanitize(fileText: FileText) {
 		return fileText
 			.split('\n')
-			.filter((line) => this._isCodeLine(line))
-			.map((line) => line.replaceAll('\r', ''));
+			.filter((line) => TextFileParser._isCodeLine(line))
+			.map((line) => line.replaceAll('\r', '').trim());
 	}
 
 	private static _isCodeLine(line: string) {
-		return !this._isDispensableLine(line);
+		return !TextFileParser._isDispensableLine(line);
 	}
 
 	private static _isDispensableLine(line: string) {
-		return this._DISPENSABLE_LINE.test(line);
+		return TextFileParser._DISPENSABLE_LINE.test(line);
 	}
 
 	private static readonly _DISPENSABLE_LINE = new RegExp('^(?:\\r|//|$)');

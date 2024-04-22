@@ -23,15 +23,15 @@ export type SymbolTableKey =
 	| PreDefinedSymbolKey;
 
 export class SymbolTable {
-	public static readonly instruction: TranslationsDict<Instruction> = {
+	public static readonly instruction = {
 		A: BinaryValue('0'),
 		C: BinaryValue('1'),
-	};
+	} satisfies TranslationsDict<Instruction>;
 
 	/**
 	 * @todo DynamicComputation values are repeated
 	 */
-	public static readonly computation: TranslationsDict<Computation> = {
+	public static readonly computation = {
 		'0': BinaryValue('101010'),
 		'1': BinaryValue('111111'),
 		'-1': BinaryValue('111010'),
@@ -74,9 +74,9 @@ export class SymbolTable {
 
 		'D|A': BinaryValue('010101'),
 		'D|M': BinaryValue('010101'),
-	};
+	} satisfies TranslationsDict<Computation>;
 
-	public static readonly destination: TranslationsDict<MemoryDestination> = {
+	public static readonly destination = {
 		null: BinaryValue('000'),
 		M: BinaryValue('001'),
 		D: BinaryValue('010'),
@@ -85,7 +85,7 @@ export class SymbolTable {
 		AM: BinaryValue('101'),
 		AD: BinaryValue('110'),
 		AMD: BinaryValue('111'),
-	};
+	} satisfies TranslationsDict<MemoryDestination>;
 
 	public static readonly jump: TranslationsDict<JumpCondition> = {
 		null: BinaryValue('000'),
@@ -96,7 +96,7 @@ export class SymbolTable {
 		JNE: BinaryValue('101'),
 		JLE: BinaryValue('110'),
 		JMP: BinaryValue('111'),
-	};
+	} satisfies TranslationsDict<JumpCondition>;
 
 	public static readonly preDefinedSymbol: PreTranslationDict<PredefinedSymbol> =
 		{
@@ -123,5 +123,5 @@ export class SymbolTable {
 			R15: '15',
 			SCREEN: '16384',
 			KBD: '24576',
-		};
+		} satisfies PreTranslationDict<PredefinedSymbol>;
 }
