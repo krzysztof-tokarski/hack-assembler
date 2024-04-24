@@ -85,7 +85,7 @@ export class CodeTranslator {
 			const jumpPart = SymbolTable.jump.null;
 			const destinationPart = SymbolTable.destination[destination];
 			const computationPart = SymbolTable.computation[computation];
-			const AMBit = computation.includes('M') ? '1' : '0';
+			const AMBit = CodeTranslator._getAMBit(computation);
 
 			return (
 				cInstructionStart + AMBit + computationPart + destinationPart + jumpPart
@@ -108,7 +108,7 @@ export class CodeTranslator {
 		}
 
 		const computationPart = SymbolTable.computation[line as ComputationKey];
-		const AMBit = computationPart.includes('M') ? '1' : '0';
+		const AMBit = CodeTranslator._getAMBit(line as ComputationKey);
 		return (
 			cInstructionStart +
 			AMBit +

@@ -1,23 +1,53 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { CodeTranslator } from '../src/code/code-translator';
-import { TextFileParser } from '../src/parser/text-file-parser';
+import {
+	expectedParsedAdd,
+	expectedParsedMax,
+	expectedParsedMaxL,
+	expectedParsedRect,
+	expectedParsedRectL,
+	expectedTranslatedAdd,
+	expectedTranslatedMax,
+	expectedTranslatedMaxL,
+	expectedTranslatedRect,
+	expectedTranslatedRectL,
+} from './mocks/text-file-parser.mocks';
 
 describe('CodeTranslator', () => {
-	describe('translateProgram', () => {
-		const BASE_PATH = 'C:\\repos\\_NAND\\nand2tetris\\projects\\06\\';
-		it('translates Add.ASM', () => {
-			const ADD_PATH = 'add\\Add.asm';
-			const mockTextFileParser = {
-				getProgramLinesArray: jest.fn().mockReturnValue([]),
-			};
-
-			const fileLines = TextFileParser.getProgramLinesArray(
-				BASE_PATH + ADD_PATH,
+	describe('translate symbolless program', () => {
+		it('translates Add.asm', () => {
+			expect(CodeTranslator.translateProgram(expectedParsedAdd)).toStrictEqual(
+				expectedTranslatedAdd,
 			);
+		});
 
-			// TODO
+		it('translates MaxL.asm', () => {
+			expect(CodeTranslator.translateProgram(expectedParsedMaxL)).toStrictEqual(
+				expectedTranslatedMaxL,
+			);
+		});
+
+		it('translates RectL.asm', () => {
+			expect(
+				CodeTranslator.translateProgram(expectedParsedRectL),
+			).toStrictEqual(expectedTranslatedRectL);
 		});
 	});
+
+	describe('translate program with symbols', () => {
+		it('translates Max.asm', () => {
+			expect(CodeTranslator.translateProgram(expectedParsedMax)).toStrictEqual(
+				expectedTranslatedMax,
+			);
+		});
+
+		it('translates Rect.asm', () => {
+			expect(CodeTranslator.translateProgram(expectedParsedRect)).toStrictEqual(
+				expectedTranslatedRect,
+			);
+		});
+	});
+
 	describe('_translateAInstruction', () => {
 		//@ts-ignore
 		const translate = CodeTranslator._translateAInstruction;
