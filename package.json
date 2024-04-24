@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "debug": "tsc && node build/main.js",
+    "debug": "tsc && node build/src/main.js",
     "test": "jest"
   },
   "devDependencies": {
