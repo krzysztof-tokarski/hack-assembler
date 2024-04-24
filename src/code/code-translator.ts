@@ -2,6 +2,7 @@ import {
 	ComputationKey,
 	DestinationKey,
 	JumpKey,
+	PreDefinedSymbolKey,
 	SymbolTable,
 } from '../symbol-table/symbol-table';
 
@@ -46,9 +47,13 @@ export class CodeTranslator {
 
 	private static _getAInstructionBinaryRepresentation(value: string): string {
 		const memoryAddress = value.slice(1);
-		const parsedToNumber = Number(memoryAddress);
+		let parsedToNumber: number = Number(memoryAddress);
 
-		if (isNaN(parsedToNumber)) throw new Error('Method not implemented');
+		if (isNaN(parsedToNumber)) {
+			parsedToNumber = Number(
+				SymbolTable.preDefinedSymbol[memoryAddress as PreDefinedSymbolKey],
+			);
+		}
 
 		return parsedToNumber
 			.toString(CodeTranslator._BINARY_RADIX)

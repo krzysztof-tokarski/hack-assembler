@@ -14,6 +14,8 @@ describe('CodeTranslator', () => {
 			const fileLines = TextFileParser.getProgramLinesArray(
 				BASE_PATH + ADD_PATH,
 			);
+
+			// TODO
 		});
 	});
 	describe('_translateAInstruction', () => {
@@ -30,15 +32,22 @@ describe('CodeTranslator', () => {
 			].forEach(([input, output]) => expect(translate(input)).toBe(output));
 		});
 
-		it('translates symbolic AInstructions', () => {
+		it('translates symbolic AInstructions for predifined symbols', () => {
 			const argReturnTuples = [
 				(['@R0', '0000000000000000'],
 				['@R1', '0000000000000001'],
 				['@R2', '0000000000000010'],
 				['@SP', '0000000000000000'],
 				['@THIS', '0000000000000001'],
-				['@SCREEN', '0000000000000010'],
-				['@KBD', '0000100001011001']) satisfies [`@${string}`, string],
+				['@SCREEN', '0100000000000000'],
+				['@KBD', '0110000000000000']) satisfies [`@${string}`, string],
+			].forEach(([input, output]) => expect(translate(input)).toBe(output));
+		});
+
+		it('translates symbolic AInstructions for unknown symbols', () => {
+			const argReturnTuples = [
+				(['@TEST', '0000000000000000'],
+				['@HELLO', '0000000000000001']) satisfies [`@${string}`, string],
 			].forEach(([input, output]) => expect(translate(input)).toBe(output));
 		});
 	});
